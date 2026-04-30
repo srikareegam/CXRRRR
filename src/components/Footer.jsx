@@ -1,6 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Phone } from 'lucide-react';
+import { Mail } from 'lucide-react';
+
+const LinkedInIcon = ({ size = 18 }) => (
+  <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="currentColor">
+    <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
+    <rect x="2" y="9" width="4" height="12" />
+    <circle cx="4" cy="4" r="2" />
+  </svg>
+);
 
 const Footer = () => {
   return (
@@ -14,13 +22,26 @@ const Footer = () => {
 
         <div style={{ flex: 1, minWidth: '200px' }}>
           <h4 style={{ marginBottom: '15px' }}>Contact Details</h4>
-          <p style={{ display: 'flex', alignItems: 'center', gap: '10px', color: 'var(--text-muted)', marginBottom: '5px' }}>
-            <Phone size={18} /> +91 9876543210
-          </p>
-          <p style={{ display: 'flex', alignItems: 'center', gap: '10px', color: 'var(--text-muted)', marginBottom: '10px' }}>
-            <Phone size={18} /> +91 9123456780
-          </p>
-          <Link to="/contact" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className="btn-primary" style={{ display: 'inline-block', fontWeight: '600', textDecoration: 'none', padding: '10px 20px', marginTop: '10px' }}>
+          <a href="mailto:kmandava@gitam.edu"
+            style={{ display: 'flex', alignItems: 'center', gap: '10px', color: 'var(--text-muted)', marginBottom: '8px', textDecoration: 'none', transition: 'color 0.2s' }}
+            onMouseEnter={e => e.currentTarget.style.color = 'var(--accent-color)'}
+            onMouseLeave={e => e.currentTarget.style.color = 'var(--text-muted)'}>
+            <Mail size={18} /> kmandava@gitam.edu
+          </a>
+          <a href="mailto:nmeesala@gitam.edu"
+            style={{ display: 'flex', alignItems: 'center', gap: '10px', color: 'var(--text-muted)', marginBottom: '10px', textDecoration: 'none', transition: 'color 0.2s' }}
+            onMouseEnter={e => e.currentTarget.style.color = 'var(--accent-color)'}
+            onMouseLeave={e => e.currentTarget.style.color = 'var(--text-muted)'}>
+            <Mail size={18} /> nmeesala@gitam.edu
+          </a>
+          <a href="https://www.linkedin.com/company/cxr-gitam/posts/?feedView=all"
+            target="_blank" rel="noreferrer"
+            style={{ display: 'flex', alignItems: 'center', gap: '10px', color: 'var(--text-muted)', marginBottom: '15px', textDecoration: 'none', transition: 'color 0.2s' }}
+            onMouseEnter={e => e.currentTarget.style.color = 'var(--accent-color)'}
+            onMouseLeave={e => e.currentTarget.style.color = 'var(--text-muted)'}>
+            <LinkedInIcon size={18} /> CXR GITAM on LinkedIn
+          </a>
+          <Link to="/contact" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className="btn-primary" style={{ display: 'inline-block', fontWeight: '600', textDecoration: 'none', padding: '10px 20px', marginTop: '5px' }}>
             Go to Contact Form &rarr;
           </Link>
         </div>

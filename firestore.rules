@@ -1,0 +1,124 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Helper: list of authorized admin emails
+    function isAdmin() {
+      return request.auth != null && request.auth.token.email in [
+        "akashkishankarri@gmail.com",
+        "steku@gitam.edu",
+        "nmeesala@gitam.edu",
+        "skotha4@gitam.in",
+        "seegam@gitam.in",
+        "dummycxr@gmail.com",
+        "kranthikiranm67@gmail.com",
+        "dummycxr@gitam.edu",
+        "kmandava@gitam.edu",
+        "director_csevsp@gitam.edu",
+        "glakkoju2@gitam.in",
+        "ptenneti2@gitam.in"
+      ];
+    }
+
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    // --- Equipment Requests ---
+    match /requests/{id} {
+      allow create: if true;
+      allow read, update, delete: if isAdmin();
+    }
+
+    // --- Products / Inventory ---
+    match /products/{id} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // --- Contact Messages ---
+    match /contact_messages/{id} {
+      allow create: if true;
+      allow read, delete: if isAdmin();
+    }
+
+    // --- Quizzes (metadata only) ---
+    match /quizzes/{quizId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // --- Quiz Results (flat collection written by students) ---
+    match /quiz_results/{id} {
+      allow create: if true;          // students submit anonymously
+      allow read: if true;            // students query for duplicate check, admins read results
+      allow delete: if isAdmin();
+    }
+
+    // --- Lessons / Tutorials ---
+    match /lessons/{id} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // --- Projects Showcase ---
+    match /projects_showcase/{id} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // --- Announcements ---
+    match /announcements/{id} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // --- Collaborators / Industry Leaders ---
+    match /collaborators/{id} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // --- Face Recognition Models / Encodings ---
+    match /face_encodings/{id} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // --- Attendance Logs ---
+    match /attendance/{id} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // ─── Lab Monitoring System ───────────────────────────────
+
+    // Active systems: written server-side (Admin SDK bypasses rules),
+    // read by the authenticated admin dashboard (client SDK / onSnapshot)
+    match /systems/{systemId} {
+      allow read: if isAdmin();
+      allow write: if false; // only Admin SDK writes (server-side API functions)
+    }
+
+    // Historical log entries — admin read only
+    match /logs/{logId} {
+      allow read: if isAdmin();
+      allow write: if false; // only Admin SDK writes
+    }
+
+    // Remote commands: admin dashboard writes via /api/command (Admin SDK),
+    // client agent reads via GET /api/commands/{id} (also Admin SDK on server)
+    // No client-side access needed — both sides go through the API.
+    match /commands/{systemId} {
+      allow read, write: if false; // all access via Admin SDK server functions only
+    }
+
+    // ────────────────────────────────────────────────────────
+
+    // --- Default: deny everything else ---
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
+

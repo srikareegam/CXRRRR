@@ -6,6 +6,9 @@ import RequestForm from "./pages/RequestForm";
 import AdminLogin from "./pages/AdminLogin";
 import AdminDashboard from "./pages/AdminDashboard";
 import ContactUs from "./pages/ContactUs";
+import Tutorials from "./pages/Tutorials";
+import Quizzes from "./pages/Quizzes";
+import QuizAttempt from "./pages/QuizAttempt";
 
 function App() {
 
@@ -20,6 +23,9 @@ function App() {
         <Route path="/admin" element={<AdminLogin />} />
         <Route path="/dashboard" element={<AdminDashboard />} />
         <Route path="/contact" element={<ContactUs />} />
+        <Route path="/tutorials" element={<Tutorials />} />
+        <Route path="/quizzes" element={<Quizzes />} />
+        <Route path="/quiz/:quizId" element={<QuizAttempt />} />
 
       </Routes>
 

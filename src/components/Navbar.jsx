@@ -22,17 +22,20 @@ const Navbar = () => {
     }}>
       <h2 style={{ margin: 0, display: 'flex', alignItems: 'center' }}>
         <Link to="/" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} style={{ display: 'flex', alignItems: 'center', textDecoration: 'none', gap: '15px' }}>
-          <img src="/CXR.png" alt="CXR" style={{ height: '40px', objectFit: 'contain' }} />
+          <img src="/CXR.png" alt="CXR" style={{ height: '56px', objectFit: 'contain' }} />
           <span style={{ color: 'rgba(255,255,255,0.6)', fontSize: '1.2rem', fontWeight: 300, userSelect: 'none' }}>X</span>
-          <img src="/image.png" alt="GITAM" style={{ height: '35px', objectFit: 'contain' }} />
+          <img src="/image.png" alt="GITAM" style={{ height: '48px', objectFit: 'contain' }} />
         </Link>
       </h2>
 
       <div style={{ display: 'flex', gap: '30px', alignItems: 'center' }}>
-        <Link to="/" style={linkStyle}>Home</Link>
+        <Link to="/" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} style={linkStyle}>Home</Link>
         <a href="/#mission-section" style={linkStyle}>Mission & Vision</a>
         <a href="/#work-section" style={linkStyle}>Field of Work</a>
         <a href="/#projects-section" style={linkStyle}>Projects</a>
+        <a href="/#announcements-section" style={linkStyle}>Announcements</a>
+        <Link to="/tutorials" style={linkStyle}>🎬 Tutorials</Link>
+        <Link to="/quizzes" style={linkStyle}>📝 Quizzes</Link>
         <Link to="/contact" style={linkStyle}>Contact Us</Link>
 
         <div
