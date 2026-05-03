@@ -208,42 +208,32 @@ export default function AdminDashboard() {
 
     // EMAIL FUNCTION
     const sendApprovalMail = (request) => {
-
-        emailjs.send(
-            "service_7jr63zq",
-            "template_zqtua62",
-            {
-                name: request.name,
-                email: request.email,
-                product: request.product,
-                start: request.startTime,
-                end: request.endTime
-            },
-            "CxtFzvtGd24TLXplS"
-        )
-            .then(() => console.log("Email sent"))
-            .catch((err) => console.log("Email error", err))
-
+        const templateParams = {
+            name: request.name,
+            email: request.email,
+            product: request.product,
+            start: request.startTime,
+            end: request.endTime
+        }
+        console.log("Sending approval email with params:", templateParams)
+        emailjs.send("service_7jr63zq", "template_zqtua62", templateParams)
+            .then((res) => console.log("✅ Approval email sent!", res.status, res.text))
+            .catch((err) => console.error("❌ Approval email error:", err))
     }
 
     const sendRejectionMail = (request) => {
-
-        emailjs.send(
-            "service_7jr63zq",
-            "template_zqtua62", // Note: Replace this with your Rejection Template ID if you have created a separate one!
-            {
-                name: request.name,
-                email: request.email,
-                product: request.product,
-                start: request.startTime,
-                end: request.endTime,
-                status: "Rejected"
-            },
-            "CxtFzvtGd24TLXplS"
-        )
-            .then(() => console.log("Rejection email sent"))
-            .catch((err) => console.log("Email error", err))
-
+        const templateParams = {
+            name: request.name,
+            email: request.email,
+            product: request.product,
+            start: request.startTime,
+            end: request.endTime,
+            status: "Rejected"
+        }
+        console.log("Sending rejection email with params:", templateParams)
+        emailjs.send("service_7jr63zq", "template_zqtua62", templateParams)
+            .then((res) => console.log("✅ Rejection email sent!", res.status, res.text))
+            .catch((err) => console.error("❌ Rejection email error:", err))
     }
 
     // APPROVE REQUEST
